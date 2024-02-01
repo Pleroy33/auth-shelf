@@ -1,6 +1,7 @@
 import React from 'react';
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { NewItemForm } from '../NewItemForm/NewItemForm';
 
 function ShelfPage() {
   const dispatch = useDispatch()
@@ -12,6 +13,7 @@ function ShelfPage() {
 
   if(items[0]) {
     return (<>
+    <NewItemForm />
     {items.map(item => {
       return (
         <div>
