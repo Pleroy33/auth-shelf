@@ -11,7 +11,8 @@ function ShelfPage() {
   }, [])
 
   if(items[0]) {
-    return (<>
+    return (
+    <>
     {items.map(item => {
       return (
         <div>
@@ -20,7 +21,8 @@ function ShelfPage() {
         </div>
       )
     })}
-    </>)
+    </>
+   )
   }
   return (
     <div className="container">
