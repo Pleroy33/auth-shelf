@@ -31,9 +31,29 @@ const router = express.Router();
 /**
  * Add an item for the logged in user to the shelf
  */
-router.post('/', (req, res) => {
- 
+router.post("/", (req, res) => {
+  let newItem = req.body;
+
+  const sqlText = `INSERT INTO "item" ("description", "image_url", "user_id")
+      VALUES ($1, $2, $3);`;
+
+  const queryParams = [
+    newItem.description,
+    newItem.image_url,
+    newItem.user_id
+  ];
+
+  pool
+    .query(sqlText, queryParams)
+    .then(() => {
+      res.status(201).send(); // Sending a 201 status code
+    })
+    .catch((error) => {
+      console.log("ERROR in server POST route");
+      console.error(error); // Changed from console.log to console.error for better error indication
+    });
 });
+
 
 /**
  * Delete an item if it's something the logged in user added
