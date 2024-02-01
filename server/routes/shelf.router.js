@@ -6,6 +6,11 @@ const router = express.Router();
  * Get all of the items on the shelf
  */
   router.get('/', (req, res) => {
+    console.log('in /get route')
+    console.log('in authenicated?', req.isAuthenticated())
+    console.log('user,', req.user)
+
+    if( req.isAuthenticated()){
     const query = `
       SELECT * FROM "item"
         ORDER BY "description" ASC;
@@ -17,7 +22,9 @@ const router = express.Router();
       .catch(err => {
         console.log('ERROR: Get all movies', err);
         res.sendStatus(500)
-      })
+      })}else {
+        res.sendStatus(403)
+      }
   
   });
 
