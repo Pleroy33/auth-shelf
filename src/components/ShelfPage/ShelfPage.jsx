@@ -11,6 +11,19 @@ function ShelfPage() {
     dispatch({type: "FETCH_ITEMS"})
   }, [dispatch])
 
+  function handleDelete(event) {
+    let itemsId = event.target.value
+    fetch(`/api/item/${itemsId}`, {
+      method: 'DELETE',
+    })
+      .then(response => {
+     console.log(itemsId)
+      })
+      .catch(err => {
+        console.error('Error while deleting item', err);
+      });
+  }
+
   if(items[0]) {
     return (<>
     <NewItemForm />
@@ -19,6 +32,7 @@ function ShelfPage() {
         <div>
           <h5>{item.description}</h5>
           <img src={item.image_url}/>
+          <button onClick={() => handleDelete(event.target)}>DELETE</button>
         </div>
       )
     })}

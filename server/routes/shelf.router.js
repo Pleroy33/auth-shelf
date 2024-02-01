@@ -99,7 +99,6 @@ router.put('/:id', (req, res) => {
       console.log("error:", error);
     });
 });
-
 /**
  * Return all users along with the total number of items
  * they have added to the shelf
