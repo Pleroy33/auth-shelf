@@ -9,7 +9,7 @@ function ShelfPage() {
 
   useEffect(() => {
     dispatch({type: "FETCH_ITEMS"})
-  }, [])
+  }, [dispatch])
 
   if(items[0]) {
     return (<>
