@@ -22,7 +22,8 @@ function ShelfPage() {
         </div>
       )
     })}
-    </>)
+    </>
+   )
   }
   return (
     <div className="container">
