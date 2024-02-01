@@ -32,7 +32,8 @@ const router = express.Router();
  * Add an item for the logged in user to the shelf
  */
 router.post("/", (req, res) => {
-  let newItem = req.body;
+  if(req.isAuthenticated()) {
+    let newItem = req.body;
 
   const sqlText = `INSERT INTO "item" ("description", "image_url", "user_id")
       VALUES ($1, $2, $3);`;
@@ -40,7 +41,7 @@ router.post("/", (req, res) => {
   const queryParams = [
     newItem.description,
     newItem.image_url,
-    newItem.user_id
+    req.user.id
   ];
 
   pool
@@ -52,6 +53,8 @@ router.post("/", (req, res) => {
       console.log("ERROR in server POST route");
       console.error(error); // Changed from console.log to console.error for better error indication
     });
+  }
+  
 });
 
 
