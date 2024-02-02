@@ -3,6 +3,8 @@ import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { NewItemForm } from '../NewItemForm/NewItemForm';
 
+
+// Fail
 function ShelfPage() {
   const dispatch = useDispatch()
   const items = useSelector(store => store.items)
