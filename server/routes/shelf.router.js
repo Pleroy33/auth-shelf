@@ -35,6 +35,7 @@ router.post("/", (req, res) => {
   if(req.isAuthenticated()) {
     let newItem = req.body;
 
+
   const sqlText = `INSERT INTO "item" ("description", "image_url", "user_id")
       VALUES ($1, $2, $3);`;
 
@@ -61,11 +62,12 @@ router.post("/", (req, res) => {
 /**
  * Delete an item if it's something the logged in user added
  */
-router.delete('/:id', (req, res) => {
-  if (req.isAuthenticated()) {
+router.delete('/:id/:itemId', (req, res) => {
+  console.log('TROUBLE', req.params.id, req.user.id, req.params.itemId);
+  if (req.isAuthenticated() && Number(req.params.id) === req.user.id) {
     // endpoint functionality
     const queryText = `DELETE FROM "item" WHERE "id" = $1`
-    const queryParams = [req.params.id]
+    const queryParams = [req.params.itemId]
     pool
     .query(queryText,queryParams)
       .then(() => {
