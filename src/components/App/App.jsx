@@ -21,6 +21,7 @@ import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
 
 import './App.css';
+import MyShelf from '../MyShelf/MyShelf';
 
 function App() {
   const dispatch = useDispatch();
@@ -82,6 +83,14 @@ function App() {
               <LoginPage />
             }
           </Route>
+
+          <ProtectedRoute
+            // logged in shows InfoPage else shows LoginPage
+            exact
+            path="/myshelf"
+          >
+            <MyShelf />
+          </ProtectedRoute>
 
           <Route
             exact

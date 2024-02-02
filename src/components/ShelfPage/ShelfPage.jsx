@@ -3,10 +3,12 @@ import axios from 'axios';
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { NewItemForm } from '../NewItemForm/NewItemForm';
+import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 
 function ShelfPage() {
   const dispatch = useDispatch()
   const items = useSelector(store => store.items)
+const history = useHistory()
 
   useEffect(() => {
     dispatch({type: "FETCH_ITEMS"})
@@ -26,8 +28,13 @@ function ShelfPage() {
       });
   }
 
+  function handleMyShelf(){
+history.push("/myshelf")
+  }
+
   if(items[0]) {
     return (<>
+    <button onClick={handleMyShelf}>my shelf</button>
     <NewItemForm />
     {items.map(item => {
       return (

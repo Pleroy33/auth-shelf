@@ -113,7 +113,24 @@ router.get('/count', (req, res) => {
  * Return a specific item by id
  */
 router.get('/:id', (req, res) => {
-  // endpoint functionality
-});
+    console.log('TROUBLE', req.params.id, req.user.id, req.params.itemId);
+    if (req.isAuthenticated() && Number(req.params.id) === req.user.id) {
+      // endpoint functionality
+      const queryText = `SELECT FROM "item" WHERE "id" = $1`
+      const queryParams = [req.params.itemId]
+      pool
+      .query(queryText,queryParams)
+        .then(() => {
+          res.sendStatus(201);
+        })
+        .catch(err => {
+          console.log('delete item didnt work,', err);
+          res.sendStatus(500)
+        })
+    } else {
+      res.sendStatus(403)
+    }
+  });
+
 
 module.exports = router;
