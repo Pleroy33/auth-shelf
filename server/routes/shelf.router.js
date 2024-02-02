@@ -84,9 +84,21 @@ router.delete('/:id', (req, res) => {
  * Update an item if it's something the logged in user added
  */
 router.put('/:id', (req, res) => {
-  // endpoint functionality
+  let ItemId = req.params.id;
+  let ItemDescription = req.body.description;
+  const queryText = `
+    UPDATE "item" SET "description" = $1 WHERE "id" = $2;
+  `;
+  const queryParams = [ItemDescription, ItemId];
+  pool
+    .query(queryText, queryParams)
+    .then((result) => {
+      res.sendStatus(200);
+    })
+    .catch((error) => {
+      console.log("error:", error);
+    });
 });
-
 /**
  * Return all users along with the total number of items
  * they have added to the shelf
