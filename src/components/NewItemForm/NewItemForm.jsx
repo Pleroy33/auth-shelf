@@ -8,7 +8,6 @@ export function NewItemForm() {
     const handleSubmit = (event) => {
         event.preventDefault()
         dispatch({type: "POST_ITEM", payload: input})
-        dispatch({type: "FETCH_ITEMS"})
         setInput({description: '', image_url: ''})
     }
     return (

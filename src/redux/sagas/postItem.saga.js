@@ -1,8 +1,9 @@
 import axios from "axios"
-import { takeEvery } from "redux-saga/effects"
+import { takeEvery, put } from "redux-saga/effects"
 
 function* postItem(action){
     yield axios.post('/api/shelf', action.payload)
+    yield put({type: "FETCH_ITEMS"})
 }
 
 function* postItemSaga(){
